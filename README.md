@@ -16,6 +16,8 @@ $ npm run dev
 
 [AstroサイトをGitHub Pagesにデプロイする 🚀 Astroドキュメント](https://docs.astro.build/ja/guides/deploy/github/)
 
+GitHub Actionsによるビルドの状況は、 [Workflow runs · suzume300/sendagi_plus](https://github.com/suzume300/sendagi_plus/actions) で確認できる。
+
 ## 設定
 
 - スタイル: `src/assets/global.css`
