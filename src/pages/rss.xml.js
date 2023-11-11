@@ -17,8 +17,8 @@ export function get(context) {
       title: article.data.title,
       pubDate: article.data.pubDate,
       description: article.data.description,
-      link: `/${article.slug}/`,
-      content: `<p>${article.data.description}</p><img src="${context.site}/${article.data.image.src}" alt="${article.data.image.alt}" />`,
+      link: `/sendagi_plus/${article.slug}/`,
+      content: `<p>${article.data.description}</p><img src="${context.site}sendagi_plus${article.data.image.src}" alt="${article.data.image.alt}" />`,
     })),
     customData: `<language>ja-jp</language>`,
   });
