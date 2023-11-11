@@ -1,0 +1,118 @@
+---
+import "@assets/global.css";
+import { SITE_TITLE } from "../site";
+
+export interface Props {
+  title: string;
+  description: string;
+  thumbnailImgSrc?: string;
+}
+// const { title, description, thumbnailImgSrc = "/social.png" } = Astro.props;
+const { title, description, thumbnailImgSrc } = Astro.props;
+
+const baseURL = Astro.site?.toString() ?? "";
+const baseURLWithoutTrailingSlash = baseURL.endsWith("/")
+  ? baseURL.slice(0, -1)
+  : baseURL;
+const canonicalURL = baseURLWithoutTrailingSlash + Astro.url.pathname;
+const absThumbnailImgSrc = baseURLWithoutTrailingSlash + thumbnailImgSrc;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
+    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
+
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {
+      thumbnailImgSrc && (
+        <meta property="og:image" content={absThumbnailImgSrc} />
+      )
+    }
+
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    {
+      thumbnailImgSrc && (
+        <meta property="twitter:image" content={absThumbnailImgSrc} />
+      )
+    }
+  </head>
+
+  <body>
+    <header class="mt-12 mb-12 flex justify-center">
+      <div id="header-inner">
+        <a href="/" class="decoration-none">
+          <div class="text-2xl font-bold">
+            {SITE_TITLE}
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <slot />
+
+    <footer class="my-16 text-neutral-500">
+      {
+        Astro.url.pathname === "/" ? (
+          <div class="flex justify-center gap-x-20 text-lg">
+            <a
+              href="/rss.xml"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-amber-500"
+            >
+              <div class="i-ion-logo-rss" />
+            </a>
+          </div>
+        ) : (
+          <div class="flex justify-center text-2xl">
+            <a href="/" class="hover:text-amber-500">
+              <div class="i-ion-home" />
+            </a>
+          </div>
+        )
+      }
+    </footer>
+  </body>
+</html>
+
+<style>
+  header:hover #header-inner {
+    animation: shake 700ms ease-out;
+  }
+
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: rotate(6deg);
+    }
+    40% {
+      transform: rotate(-6deg);
+    }
+    60% {
+      transform: rotate(6deg);
+    }
+    80% {
+      transform: rotate(-6deg);
+    }
+    100% {
+      transform: rotate(0);
+    }
+  }
+</style>

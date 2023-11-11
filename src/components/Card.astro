@@ -1,0 +1,97 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { remark } from "remark";
+import strip from "strip-markdown";
+
+export interface Props {
+  article: CollectionEntry<"articles">;
+  index: number;
+}
+
+const { article, index } = Astro.props;
+
+const stripMarkdown = (text: string) => {
+  return remark().use(strip).processSync(text).toString();
+};
+
+const N_CHARS_EXCERPT = 310;
+---
+
+<div class=`card group card-${index}`>
+  <a
+    href={`/${article.slug}/`}
+    class="text-neutral-800 decoration-none hover:text-neutral-900"
+  >
+    <div class="flex flex-col gap-y-2">
+      <div class="relative">
+        <img
+          src={article.data.image.src}
+          alt={article.data.image.alt}
+          class="rounded"
+        />
+        <div
+          class="absolute top-3 left-3 bg-neutral-800/65 text-white text-md rounded px-1.5 py-0.5 tracking-tighter"
+        >
+          <time datetime={article.data.pubDate.toISOString()}>
+            {article.data.pubDate.toISOString().slice(0, 10)}
+          </time>
+        </div>
+      </div>
+
+      <div
+        class="title text-lg group-hover:underline underline-amber-500 decoration-5 decoration-offset--2"
+      >
+        {article.data.title}
+      </div>
+
+      <div class="text-xs tracking-tighter">
+        {article.data.description}
+      </div>
+
+      {
+        index === 0 ? (
+          <div class="card-0-excerpt text-sm overflow-hidden italic opacity-50">
+            {stripMarkdown(article.body).slice(0, N_CHARS_EXCERPT)} …
+          </div>
+        ) : null
+      }
+    </div>
+  </a>
+
+  <style>
+    .title {
+      text-decoration-skip-ink: none;
+    }
+
+    .card {
+      transition: transform 300ms;
+    }
+    .card:hover {
+      transform: translateY(-9px);
+      transition: transform 300ms;
+    }
+
+    .card-0-excerpt {
+      display: none;
+    }
+    @media (min-width: 640px) {
+      .card-0-excerpt {
+        display: block;
+      }
+      .card-0 {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 3;
+      }
+      .card-1 {
+        grid-column-start: 3;
+        grid-column-end: 4;
+      }
+      .card-2 {
+        grid-column-start: 3;
+        grid-column-end: 4;
+      }
+    }
+  </style>
+</div>

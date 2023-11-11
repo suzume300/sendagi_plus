@@ -1,0 +1,29 @@
+{
+  "name": "",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "format": "prettier --write . --plugin-search-dir=."
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^0.19.4",
+    "@astrojs/rss": "^2.4.1",
+    "astro": "^2.4.1",
+    "astro-relative-links": "^0.3.4"
+  },
+  "devDependencies": {
+    "@iconify/json": "^2.2.65",
+    "@unocss/reset": "^0.51.12",
+    "@unocss/transformer-directives": "^0.51.12",
+    "prettier": "^2.8.8",
+    "prettier-plugin-md-nocjsp": "^1.5.1",
+    "remark": "^14.0.3",
+    "strip-markdown": "^5.0.1",
+    "unocss": "^0.51.12"
+  }
+}
