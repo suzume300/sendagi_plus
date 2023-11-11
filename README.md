@@ -33,5 +33,5 @@ GitHub Actionsによるビルドの状況は、 [Workflow runs · suzume300/send
   - `pubDate`
   - `description`
   - `image.src`, `image.alt`
-- 画像を `public/images/` に追加
+- 画像を `public/images/` に追加（サイズを小さくすると良い）
 - 本文を記述
