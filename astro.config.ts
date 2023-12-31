@@ -5,7 +5,7 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://suzume300.github.io/sendagi_plus/", // TODO: update
+  site: "https://suzume300.com",
   trailingSlash: "always",
   integrations: [
     UnoCSS({
